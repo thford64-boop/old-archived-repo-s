@@ -1,0 +1,9 @@
+; FXPack.def — Module Definition File
+; Explicitly exports the two symbols the OFX host looks for.
+; Without this, MSVC may mangle or not export them correctly.
+
+LIBRARY "FXPack"
+
+EXPORTS
+    OfxGetNumberOfPlugins
+    OfxGetPlugin

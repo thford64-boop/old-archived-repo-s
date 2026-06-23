@@ -1,0 +1,336 @@
+============================================================
+  HARDWARE TIER ANALYSIS TOOL v3 -- INSTRUCTIONS
+============================================================
+
+  What does this tool do?
+  ----------------------------------------------------------
+  It scans your Windows PC, collects detailed hardware info
+  (CPU, GPU, RAM, battery, system model, BIOS, time zone,
+  hotfixes, network adapters, and more), then compares your
+  hardware against a library of 80+ CPUs and 85+ GPUs to
+  show exactly where your machine ranks -- with upgrade
+  advice and battery health grading for laptops.
+
+  Output: hardware_report.txt (plain text, open in Notepad)
+
+
+============================================================
+  REQUIREMENTS
+============================================================
+
+  1. Windows 10 or Windows 11
+     (the scanner uses systeminfo and PowerShell WMI --
+      both are built into Windows)
+
+  2. GCC / MinGW-w64  (to compile the scanner)
+     See "Installing GCC" below.
+
+  3. Python 3.8 or newer
+     See "Installing Python" below.
+
+
+============================================================
+  QUICKSTART -- Just want to run it?
+============================================================
+
+  *** IMPORTANT -- IF YOU ARE UPDATING FROM A PREVIOUS VERSION ***
+
+  You must REPLACE the old files in your project folder with
+  the new ones.  Do not just copy the .bat into a fresh folder
+  and leave old .c / .py files behind.  The three files that
+  must all be from the same version are:
+
+      run_analysis.bat   <-- replace the old one
+      scanner.c          <-- replace the old one
+      analyzer.py        <-- replace the old one
+
+  The easiest way: delete the old three files and drop the
+  new ones in their place, then run the tool as normal.
+
+  ----------------------------------------------------------
+
+  Step 1: Open a Command Prompt (cmd.exe) or PowerShell in
+          the folder where you extracted this tool.
+
+            Right-click inside the folder -> "Open in Terminal"
+            OR
+            Type "cmd" in the address bar and press Enter
+
+  Step 2: Type this and press Enter:
+
+            run_analysis.bat
+
+  That's it. The script will:
+    [1/3] Compile scanner.c  ->  scanner.exe
+    [2/3] Run the scanner (may take 10-20 seconds for systeminfo)
+    [3/3] Run the Python analyzer -> print + save hardware_report.txt
+
+  When it finishes, it asks if you want to open the report in
+  Notepad. Press Y and Enter to view it.
+
+
+============================================================
+  INSTALLING GCC (MinGW-w64)  -- if you don't have it
+============================================================
+
+  OPTION A -- MSYS2 (recommended, easiest):
+
+    1. Go to: https://www.msys2.org/
+    2. Download and run the MSYS2 installer.
+    3. Open the "MSYS2 UCRT64" app from the Start Menu.
+    4. In the MSYS2 window, paste this and press Enter:
+         pacman -S mingw-w64-ucrt-x86_64-gcc
+    5. Press Y when asked to confirm.
+    6. Add GCC to your Windows PATH:
+         - Open Start -> search "environment variables"
+         - Click "Environment Variables"
+         - Under "System Variables", find "Path", click Edit
+         - Click New -> type: C:\msys64\ucrt64\bin
+         - Click OK on all dialogs
+    7. Open a NEW Command Prompt window and type:
+         gcc --version
+       You should see something like "gcc (Rev...) 14.x.x"
+
+  OPTION B -- WinLibs standalone (no install needed):
+
+    1. Go to: https://winlibs.com/
+    2. Download a recent "Release" build (x86_64, UCRT, MSVCRT ok)
+    3. Extract the zip -- you'll get a "mingw64" folder
+    4. Add <wherever you extracted it>\mingw64\bin to PATH
+       (same steps as Option A, step 6 -- but use your path)
+
+  OPTION C -- If you already have MSYS2 but gcc isn't found:
+
+    Open a new CMD and run:
+      set PATH=%PATH%;C:\msys64\ucrt64\bin
+    Then run run_analysis.bat from that same window.
+
+
+============================================================
+  INSTALLING PYTHON -- if you don't have it
+============================================================
+
+  1. Go to: https://www.python.org/downloads/
+  2. Download Python 3.12 (or any 3.8+ version).
+  3. Run the installer.
+  4. IMPORTANT: Check "Add Python to PATH" on the first screen.
+  5. Click "Install Now".
+  6. Verify: open a new CMD and type:
+       python --version
+     You should see "Python 3.x.x"
+
+  Note: The analyzer uses only Python's standard library.
+  No pip installs are needed.
+
+
+============================================================
+  RUNNING MANUALLY (step by step)
+============================================================
+
+  If run_analysis.bat doesn't work, you can do each step by hand:
+
+  Step 1 -- Compile the scanner:
+    gcc scanner.c -o scanner.exe -O2
+
+    If that fails, try the extended flags:
+    gcc scanner.c -o scanner.exe -lole32 -loleaut32 -lwbemuuid -lws2_32 -DUNICODE -D_UNICODE -O2
+
+  Step 2 -- Run the scanner:
+    scanner.exe
+    (This takes 10-20 seconds. It writes local_specs.json.)
+
+  Step 3 -- Run the analyzer:
+    python analyzer.py
+    (Reads local_specs.json + hardware_library.json, prints the
+     report, and saves hardware_report.txt.)
+
+
+============================================================
+  FILE DESCRIPTIONS
+============================================================
+
+  scanner.c          The C source for the hardware scanner.
+                     Uses systeminfo + PowerShell + Windows API.
+                     Collects CPU, GPU, RAM, battery, system info.
+                     Produces local_specs.json.
+
+  analyzer.py        The Python script that reads your specs
+                     and the library, and writes the report.
+
+  hardware_library.json
+                     The benchmark database: 80 CPUs, 85 GPUs.
+                     Edit freely to add your hardware.
+
+  run_analysis.bat   One-click build + run pipeline.
+
+  instructions.txt   This file.
+
+  --- Generated at runtime ---
+
+  scanner.exe        Compiled binary (created by run_analysis.bat).
+  local_specs.json   Your scanned hardware specs (JSON).
+  hardware_report.txt  The final ranking report.
+
+
+============================================================
+  UNDERSTANDING THE REPORT
+============================================================
+
+  The report shows:
+
+  SYSTEM SNAPSHOT
+    Your OS, system model, CPU, cores, RAM, GPU, BIOS,
+    time zone, boot time, hotfixes, network adapters,
+    and battery status (laptops only).
+
+  CPU ANALYSIS / GPU ANALYSIS
+    - Library Match: the closest entry in the database
+    - Match Confidence: how certain the match is (0-100%)
+    - Benchmark Score: PassMark-style normalized score
+    - Tier: F (worst) through S+ (best)
+    - Hierarchy Position: how many entries you beat / lose to
+    - Performance Percentile: your rank in the full library
+    - Tier Distribution bar chart
+    - Top 5 hardware you outperform
+    - Next 5 upgrade targets (with score gap)
+
+  RAM CONTEXT
+    RAM is tiered F through S+ based on capacity.
+
+  BATTERY  (laptops only)
+    - Charge level with progress bar
+    - Status: Charging / Discharging / AC - Full / etc.
+    - Chemistry: Li-Ion, NiMH, etc.
+    - Health %: current max capacity vs. factory design capacity
+    - Health grade: Excellent / Fair / Poor / Critical
+    - Design capacity and current max capacity (Wh)
+    - Cycle count with wear assessment
+
+    Note: Cycle count and capacity require ACPI WMI support.
+    Most modern laptops expose this data; some do not.
+    If cycles show "Not reported", the driver does not expose it.
+
+  UPGRADE ADVICE
+    Specific tips based on your component scores.
+
+  OVERALL SUMMARY
+    Combined percentile across CPU + GPU.
+    Verdict: Elite / High Performer / Above Average /
+             Mainstream / Budget Segment / Entry-Legacy.
+
+
+============================================================
+  TIER SCALE  (PassMark-inspired)
+============================================================
+
+  Tier  Score Range    Description
+  ----  -----------    -----------------------------------
+  F     < 2,000        Below entry-level
+  E     2,000-5,000    Entry-level
+  D     5,000-10,000   Budget
+  C     10,000-20,000  Mainstream
+  B     20,000-35,000  Enthusiast
+  A     35,000-55,000  High-End
+  S     55,000-75,000  Flagship / Workstation
+  S+    75,000+        Absolute Pinnacle
+
+
+============================================================
+  EXTENDING THE LIBRARY
+============================================================
+
+  Open hardware_library.json in any text editor.
+  Add entries to "cpu_library" or "gpu_library" like this:
+
+  CPU example:
+  {
+    "id": "cpu_081",
+    "model": "AMD Ryzen 9 9950X",
+    "tier": "S+",
+    "cores": 32,
+    "score": 82000,
+    "notes": "Zen 5 flagship"
+  }
+
+  GPU example:
+  {
+    "id": "gpu_086",
+    "model": "NVIDIA GeForce RTX 5090",
+    "tier": "S+",
+    "vram_gb": 32,
+    "score": 80000,
+    "notes": "Blackwell absolute flagship"
+  }
+
+  Score reference: https://www.cpubenchmark.net  (CPU)
+                   https://www.videocardbenchmark.net  (GPU)
+
+  The matching is fuzzy -- model names don't need to match
+  exactly. But more specific names (include the full model
+  number) give better results.
+
+
+============================================================
+  TROUBLESHOOTING
+============================================================
+
+  Q: run_analysis.bat crashes immediately with
+     ": was unexpected at this time."
+  A: You are running an OLD version of run_analysis.bat.
+     Replace it with the latest version. The old file
+     contained special Unicode characters that cmd.exe
+     cannot parse.
+
+  Q: "[ERROR] Spec file not found: local_specs.json" when
+     running analyzer.py directly.
+  A: You must run scanner.exe first (or run_analysis.bat
+     which does this automatically). analyzer.py reads the
+     JSON that scanner.exe produces.
+
+  Q: scanner.exe crashes immediately or closes with no output.
+  A: Run it from a CMD window (not by double-clicking) so you
+     can read the error message.
+
+  Q: "gcc: command not found" even after installing MinGW.
+  A: You need to open a NEW CMD window after adding to PATH.
+     Old windows don't pick up PATH changes.
+
+  Q: GPU shows "Could not match..."
+  A: Integrated GPUs sometimes have generic names like
+     "AMD Radeon Graphics". The library includes common
+     iGPU names. If yours still doesn't match, open
+     hardware_library.json and add it manually.
+
+  Q: Compilation fails with "undefined reference to WMI..."
+  A: Try the extended compile flags:
+     gcc scanner.c -o scanner.exe -lole32 -loleaut32 -lwbemuuid -lws2_32 -DUNICODE -D_UNICODE -O2
+
+  Q: systeminfo is slow / hangs.
+  A: On some systems systeminfo can take 30+ seconds on the
+     first run. This is normal. Wait it out.
+
+  Q: Battery shows "Not reported" for cycle count.
+  A: The ACPI WMI class BatteryCycleCount is not exposed by
+     all laptop firmware. This is a hardware/driver limitation
+     and cannot be worked around in software.
+
+  Q: The report says my CPU score seems wrong.
+  A: The fuzzy matcher picks the closest name. Check "Library
+     Match" in the report -- if it picked the wrong chip, find
+     your CPU's PassMark score at cpubenchmark.net and add it
+     to hardware_library.json.
+
+  Q: Python says "No module named X".
+  A: The analyzer uses only standard library modules.
+     Make sure you're running Python 3.8+.
+     Type: python --version
+
+
+============================================================
+  LICENSE
+============================================================
+
+  MIT License -- free to use, modify, and distribute.
+  No warranty. Scores are estimates, not official benchmarks.
+
+============================================================

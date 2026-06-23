@@ -1,0 +1,178 @@
+════════════════════════════════════════════════════════════════════════
+  ██╗  ██╗ █████╗ ██████╗ ██████╗     ████████╗██╗███████╗██████╗
+  ██║  ██║██╔══██╗██╔══██╗██╔══██╗       ██╔══╝██║██╔════╝██╔══██╗
+  ███████║███████║██████╔╝██║  ██║        ██║   ██║█████╗  ██████╔╝
+  ██╔══██║██╔══██║██╔══██╗██║  ██║        ██║   ██║██╔══╝  ██╔══██╗
+  ██║  ██║██║  ██║██║  ██║██████╔╝        ██║   ██║███████╗██║  ██║
+  ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝         ╚═╝   ╚═╝╚══════╝╚═╝  ╚═╝
+════════════════════════════════════════════════════════════════════════
+  Hardware Hierarchy Report  |  Generated: 2026-06-07 18:11:54
+  Scanner version: 3.0.0
+════════════════════════════════════════════════════════════════════════
+
+════════════════════════════════════════════════════════════════════════
+  SYSTEM SNAPSHOT
+════════════════════════════════════════════════════════════════════════
+  Operating System   : Microsoft Windows 10 Home
+  System Manufacturer: HP
+  System Model       : HP ENVY x360 2-in-1 Laptop 15-ey0xxx
+  System Type        : x64-based PC
+  CPU Model          : AMD Ryzen 5 5625U with Radeon Graphics
+  Logical Cores      : 12
+  Physical Cores     : 6
+  CPU Base Speed     : 2,301 MHz
+  Total RAM          : 16 GB  (15,680 MB installed)
+  RAM In Use         : 9,516 MB  (6,164 MB free)
+  GPU Model          : AMD Radeon (TM) Graphics
+  GPU VRAM           : 512 MB
+  GPU Driver         : 31.0.21924.61
+  Host Name          : DOG
+  Time Zone          : (UTC-06:00) Central Time (US & Canada)
+  Last Boot          : 6/5/2026, 11:06:51 PM
+  BIOS               : Insyde F.14, 7/5/2023
+  Hotfixes Installed : 13
+  Network Adapters   : 1
+  Battery            : 100% charge | AC - Full | Health ~78% | 0 cycles
+
+════════════════════════════════════════════════════════════════════════
+  CPU ANALYSIS
+════════════════════════════════════════════════════════════════════════
+  Library Match    : AMD Ryzen 5 5625U
+  Match Confidence : 100%
+  Benchmark Score  : 14,200
+  Tier             : C — Mainstream
+  Notes            : Zen 3 mobile refresh
+
+  HIERARCHY POSITION
+  Below your CPU        :  24 / 80  ( 30.0%)
+  At your level         :   1 / 80  (  1.2%)
+  Above your CPU        :  55 / 80  ( 68.8%)
+
+  Performance Percentile:  30.0th percentile
+  [████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 30.0%
+
+────────────────────────────────────────────────────────────────────────
+  CPU Tier Distribution (library)
+────────────────────────────────────────────────────────────────────────
+  F   [█                                   ]  4
+  E   [█                                   ]  3
+  D   [███                                 ]  7
+  C   [████████                            ] 18 ◄ YOUR HARDWARE
+  B   [█████████                           ] 20
+  A   [███████                             ] 16
+  S   [████                                ] 10
+  S+  [                                    ]  2
+
+────────────────────────────────────────────────────────────────────────
+  Top 5 CPUs Outperformed by Your System
+────────────────────────────────────────────────────────────────────────
+  █ [C ] AMD Ryzen 5 4600H                               score  13,800
+  █ [C ] Intel Core i5-1235U                             score  13,600
+  █ [C ] Intel Core i7-1165G7                            score  13,500
+  █ [C ] Intel Core i5-10400                             score  13,200
+  █ [C ] Intel Core i7-8700                              score  12,900
+
+────────────────────────────────────────────────────────────────────────
+  Next 5 CPUs Ahead of Your System  (Upgrade Targets)
+────────────────────────────────────────────────────────────────────────
+  █ [C ] AMD Ryzen 5 6600U                               score  14,500  (+300)
+  █ [C ] AMD Ryzen 5 3600                                score  14,600  (+400)
+  █ [C ] Intel Core i5-11400                             score  14,900  (+700)
+  █ [C ] AMD Ryzen 5 3600X                               score  15,200  (+1,000)
+  █ [C ] Intel Core i5-12400                             score  17,800  (+3,600)
+
+════════════════════════════════════════════════════════════════════════
+  GPU ANALYSIS
+════════════════════════════════════════════════════════════════════════
+  Library Match    : AMD Radeon Graphics
+  Match Confidence : 100%
+  Benchmark Score  : 4,200
+  VRAM (library)   : 0 GB
+  Tier             : E — Entry-Level
+  Notes            : Generic Radeon iGPU (Ryzen 5000/6000 mobile)
+
+  HIERARCHY POSITION
+  Below your GPU        :   7 / 85  (  8.2%)
+  At your level         :   1 / 85  (  1.2%)
+  Above your GPU        :  77 / 85  ( 90.6%)
+
+  Performance Percentile:  8.2th percentile
+  [███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 8.2%
+
+────────────────────────────────────────────────────────────────────────
+  GPU Tier Distribution (library)
+────────────────────────────────────────────────────────────────────────
+  F   [██                                  ]  5
+  E   [████                                ] 11 ◄ YOUR HARDWARE
+  D   [█████                               ] 12
+  C   [████████                            ] 19
+  B   [█████                               ] 13
+  A   [█████                               ] 14
+  S   [██                                  ]  7
+  S+  [█                                   ]  4
+
+────────────────────────────────────────────────────────────────────────
+  Top 5 GPUs Outperformed by Your System
+────────────────────────────────────────────────────────────────────────
+  ▒ [E ] AMD Radeon RX 560                                 score   3,800
+  ▒ [E ] NVIDIA GeForce MX450                              score   3,200
+  ░ [F ] AMD Radeon RX 550                                 score   2,100
+  ░ [F ] AMD Radeon Vega 8                                 score   1,800
+  ░ [F ] NVIDIA GeForce GT 1030                            score   1,600
+
+────────────────────────────────────────────────────────────────────────
+  Next 5 GPUs Ahead of Your System  (Upgrade Targets)
+────────────────────────────────────────────────────────────────────────
+  ▒ [E ] AMD Radeon 780M                                   score   4,500  (+300)
+  ▒ [E ] Intel Iris Xe Graphics                            score   4,800  (+600)
+  ▒ [E ] NVIDIA GeForce GTX 1050 Ti                        score   5,100  (+900)
+  ▒ [E ] AMD Radeon RX 6400                                score   5,500  (+1,300)
+  ▒ [E ] NVIDIA GeForce GTX 1650                           score   6,500  (+2,300)
+
+════════════════════════════════════════════════════════════════════════
+  RAM CONTEXT
+════════════════════════════════════════════════════════════════════════
+  Installed RAM    : 16 GB
+  RAM Tier         : C — Mainstream
+  Assessment       : Mainstream sweet-spot — comfortable for most workloads
+
+════════════════════════════════════════════════════════════════════════
+  BATTERY
+════════════════════════════════════════════════════════════════════════
+  Charge Level     : 100%
+  [████████████████████████████████████████] 100%
+  Status           : AC - Full
+  Chemistry        : Li-Ion
+  Battery Health   : ~78%
+  [███████████████████████████████░░░░░░░░░] 78%
+  Health Grade     : ⚠  Fair — noticeable wear; plan for replacement within 1-2 years
+  Design Capacity  : 51,000 mWh  (51.0 Wh)
+  Current Max Cap  : 39,780 mWh  (39.8 Wh)
+  Charge Cycles    : 0
+  Cycle Assessment : ✅ Low cycle count — battery is relatively fresh
+
+════════════════════════════════════════════════════════════════════════
+  UPGRADE ADVICE
+════════════════════════════════════════════════════════════════════════
+  💡 GPU: Your GPU is a significant bottleneck. A mid-range upgrade would transform performance.
+
+════════════════════════════════════════════════════════════════════════
+  OVERALL SUMMARY
+════════════════════════════════════════════════════════════════════════
+  Combined Performance Percentile : 19.1th
+  [███████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 19.1%
+
+  Overall System Tier  : E — Entry-Level
+
+  ⚠  Budget Segment — Limited headroom; targeted upgrade recommended.
+
+  Component breakdown:
+    █ CPU    Tier C   |  Outperforms  30.0% of library  (24/80 entries below)
+    ▒ GPU    Tier E   |  Outperforms   8.2% of library  (7/85 entries below)
+       RAM   Tier C   |  16 GB — Mainstream sweet-spot — comfortable for most workloads
+
+════════════════════════════════════════════════════════════════════════
+  END OF REPORT
+════════════════════════════════════════════════════════════════════════
+  Report saved to: hardware_report.txt
+════════════════════════════════════════════════════════════════════════

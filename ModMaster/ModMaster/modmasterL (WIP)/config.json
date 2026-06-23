@@ -1,0 +1,9 @@
+{
+  "complexity": "low",
+  "models": {
+    "low": "qwen2.5:1.5b",
+    "medium": "llama3.1:8b",
+    "high": "llama3.1:14b",
+    "ultra": "llama3.3:70b"
+  }
+}

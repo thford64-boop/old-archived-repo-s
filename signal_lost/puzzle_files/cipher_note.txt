@@ -1,0 +1,12 @@
+INTERCEPTED TRANSMISSION — EYES ONLY
+======================================
+Timestamp: 2024-11-03 02:17:44 UTC
+Source: UNKNOWN
+Encoding: UNKNOWN
+
+--- BEGIN ENCODED MESSAGE ---
+VGhlIGtleXdvcmQgaXM6IFNQSEVSRSAuIFRoaXMgaXMgYSBCYXNlNjQgZW5jb2RlZCBtZXNzYWdl
+--- END ENCODED MESSAGE ---
+
+NOTE: Analysts believe this uses a standard encoding scheme.
+      The keyword inside is the passphrase fragment you need.

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  FXPack.vcxproj
+  Visual Studio 2022 project for the FXPack OFX Plugin
+  
+  BEFORE OPENING: Set OFX_SDK_ROOT in the PropertyGroup below.
+  If you're using the bundled include, set it to $(ProjectDir) and 
+  the include path will find our local include/ folder.
+-->
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- ── Platform Configuration ── -->
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+
+  <!-- ── Project Globals ── -->
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}</ProjectGuid>
+    <RootNamespace>FXPack</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+
+  <!-- ── Shared Configuration ── -->
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>     <!-- builds a .dll -->
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>                   <!-- VS2022 toolset -->
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+
+  <!-- ── User Macros ── -->
+  <PropertyGroup Label="UserMacros">
+    <!--
+      Set OFX_SDK_ROOT if you downloaded the official OFX SDK separately.
+      Point it to the folder containing include/ofxCore.h
+      e.g.  C:\OFX\openfx
+      
+      If you're using the bundled include folder inside this project, 
+      leave this blank — the IncludePath below uses $(ProjectDir)include.
+    -->
+    <OFX_SDK_ROOT></OFX_SDK_ROOT>
+  </PropertyGroup>
+
+  <!-- ── Output paths ── -->
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(ProjectDir)build\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)build\$(Configuration)\obj\</IntDir>
+    <!-- DLL must be named FXPack.ofx on Windows (no .dll extension in the bundle) -->
+    <TargetName>FXPack</TargetName>
+    <TargetExt>.ofx</TargetExt>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)build\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)build\$(Configuration)\obj\</IntDir>
+    <TargetName>FXPack</TargetName>
+    <TargetExt>.ofx</TargetExt>
+  </PropertyGroup>
+
+  <!-- ── Compiler settings ── -->
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>false</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>
+        $(ProjectDir)include;
+        $(OFX_SDK_ROOT)include;
+        %(AdditionalIncludeDirectories)
+      </AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>
+        _DEBUG;_WINDOWS;_USRDLL;WIN32;WIN64;
+        %(PreprocessorDefinitions)
+      </PreprocessorDefinitions>
+      <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <!-- OFX plugins export only two C functions; no import lib needed -->
+      <ModuleDefinitionFile>$(ProjectDir)src\FXPack.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>
+        $(ProjectDir)include;
+        $(OFX_SDK_ROOT)include;
+        %(AdditionalIncludeDirectories)
+      </AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>
+        NDEBUG;_WINDOWS;_USRDLL;WIN32;WIN64;
+        %(PreprocessorDefinitions)
+      </PreprocessorDefinitions>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ModuleDefinitionFile>$(ProjectDir)src\FXPack.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <!-- ── Source Files ── -->
+  <ItemGroup>
+    <ClCompile Include="src\FXPackPlugin.cpp" />
+    <ClCompile Include="src\effectGrain.cpp" />
+    <ClCompile Include="src\effectShake.cpp" />
+    <ClCompile Include="src\effectBlur.cpp" />
+    <ClCompile Include="src\effectTransition.cpp" />
+    <ClCompile Include="src\effectGlow.cpp" />
+  </ItemGroup>
+
+  <!-- ── Header Files ── -->
+  <ItemGroup>
+    <ClInclude Include="include\ofxCore.h" />
+    <ClInclude Include="include\pluginGlobals.h" />
+    <ClInclude Include="include\effectGrain.h" />
+    <ClInclude Include="include\effectShake.h" />
+    <ClInclude Include="include\effectBlur.h" />
+    <ClInclude Include="include\effectTransition.h" />
+    <ClInclude Include="include\effectGlow.h" />
+  </ItemGroup>
+
+  <!-- ── Post-build: copy .ofx into the bundle ── -->
+  <ItemGroup>
+    <None Include="src\FXPack.def" />
+    <None Include="bundle\FXPack.ofx.bundle\Contents\Info.plist" />
+  </ItemGroup>
+
+  <Target Name="AfterBuild">
+    <Message Text="Copying $(TargetName)$(TargetExt) into OFX bundle..." Importance="high" />
+    <Copy
+      SourceFiles="$(OutDir)$(TargetName)$(TargetExt)"
+      DestinationFolder="$(ProjectDir)bundle\FXPack.ofx.bundle\Contents\Win64\"
+      OverwriteReadOnlyFiles="true"
+    />
+    <Message Text="Bundle ready: $(ProjectDir)bundle\FXPack.ofx.bundle" Importance="high" />
+  </Target>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+
+</Project>

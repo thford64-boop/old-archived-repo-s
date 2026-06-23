@@ -1,0 +1,1 @@
+run [Environment]::SetEnvironmentVariable("MPV_PATH", "C:\Program Files\MPV Player\mpv.exe", "User") to add MPV on path (I HAD THIS ISSUE)

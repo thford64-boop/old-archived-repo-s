@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Info.plist — OFX Plugin Bundle Metadata
+  
+  Required by the OFX specification for the .ofx.bundle folder structure.
+  DaVinci Resolve reads this on Windows too.
+-->
+<plist version="1.0">
+<dict>
+    <!-- Bundle identifier — must match your plugin IDs' prefix -->
+    <key>CFBundleIdentifier</key>
+    <string>com.fxpack.FXPack</string>
+
+    <!-- Human-readable name shown in Resolve's Effects Library -->
+    <key>CFBundleName</key>
+    <string>FXPack</string>
+
+    <key>CFBundleDisplayName</key>
+    <string>FXPack OFX Plugin Suite</string>
+
+    <!-- Version strings -->
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+
+    <key>CFBundleVersion</key>
+    <string>1.0.0</string>
+
+    <!-- Must be "BNDL" for OFX bundles -->
+    <key>CFBundlePackageType</key>
+    <string>BNDL</string>
+
+    <!-- Principal class (required field, can be empty) -->
+    <key>NSPrincipalClass</key>
+    <string></string>
+
+    <!-- Required OFX signature -->
+    <key>CFBundleSignature</key>
+    <string>OFX!</string>
+
+    <!-- The executable inside Contents/Win64/ — name without extension -->
+    <key>CFBundleExecutable</key>
+    <string>FXPack</string>
+
+    <!-- Copyright -->
+    <key>NSHumanReadableCopyright</key>
+    <string>Copyright 2024 FXPack. All rights reserved.</string>
+</dict>
+</plist>

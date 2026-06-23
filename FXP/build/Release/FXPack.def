@@ -1,0 +1,3 @@
+EXPORTS
+    OfxGetNumberOfPlugins @1
+    OfxGetPlugin @2

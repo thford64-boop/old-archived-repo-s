@@ -1,0 +1,47 @@
+{
+  "scanner_version": "3.0.0",
+  "system": {
+    "host_name": "DOG",
+    "manufacturer": "HP",
+    "model": "HP ENVY x360 2-in-1 Laptop 15-ey0xxx",
+    "type": "x64-based PC",
+    "bios_version": "Insyde F.14, 7/5/2023",
+    "domain": "WORKGROUP",
+    "logon_server": "\\\\DOG",
+    "time_zone": "(UTC-06:00) Central Time (US & Canada)",
+    "boot_time": "6/5/2026, 11:06:51 PM"
+  },
+  "os": {
+    "name": "Microsoft Windows 10 Home",
+    "version": "10.0.19045 N/A Build 19045"
+  },
+  "cpu": {
+    "model": "AMD Ryzen 5 5625U with Radeon Graphics",
+    "logical_cores": 12,
+    "physical_cores": 6,
+    "base_mhz": 2301
+  },
+  "ram": {
+    "total_gb": 16,
+    "total_mb": 15680,
+    "available_mb": 6164
+  },
+  "gpu": {
+    "model": "AMD Radeon (TM) Graphics",
+    "driver_version": "31.0.21924.61",
+    "vram": "512 MB",
+    "all_gpus": "AMD Radeon (TM) Graphics"
+  },
+  "hotfixes_installed": 13,
+  "nics_installed": 1,
+  "battery": {
+    "present": true,
+    "charge_pct": 100,
+    "status": "AC - Full",
+    "chemistry": "Li-Ion",
+    "design_capacity_mwh": 51000,
+    "full_capacity_mwh": 39780,
+    "health_pct": 78,
+    "cycle_count": 0
+  }
+}

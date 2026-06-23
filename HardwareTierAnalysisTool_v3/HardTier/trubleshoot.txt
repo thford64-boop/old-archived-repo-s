@@ -1,0 +1,3 @@
+if "path not found" for gcc
+where /r C:\ gcc.exe 2>nul
+set PATH=%PATH%;C:/your/path/here
